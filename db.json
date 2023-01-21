@@ -1,0 +1,23 @@
+{
+  "profile": {
+    "login": "admin",
+    "password": "1234"
+  },
+  "categoties": [
+    {
+      "id": 0,
+      "name": "Смартфоны",
+      "preview": "/images/phones/preview.jpg"
+    },
+    {
+      "id": 1,
+      "name": "Аксессуары",
+      "preview": "/images/accessory/preview.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Умные устройства",
+      "preview": "/images/usage/preview.jpg"
+    }
+  ]
+}
