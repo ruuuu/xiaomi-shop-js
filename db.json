@@ -3,7 +3,7 @@
     "login": "admin",
     "password": "1234"
   },
-  "categoties": [
+  "categories": [
     {
       "id": 0,
       "name": "Смартфоны",
@@ -19,5 +19,95 @@
       "name": "Умные устройства",
       "preview": "/images/usage/preview.jpg"
     }
+  ],
+  "products": [
+    {
+      "id": 0,
+      "category": 0,
+      "categoryName": "Смартфоны",
+      "preview": "/images/phones/phone-1.jpg",
+      "name": "Xiaomi Redmi A1+ 2/32GB (голубой)",
+      "price": 4990
+    },
+    {
+      "id": 1,
+      "category": 0,
+      "categoryName": "Смартфоны",
+      "preview": "/images/phones/phone-1.jpg",
+      "name": "Xiaomi Redmi A1+ 2/32GB (голубой)",
+      "price": 4990
+    },
+    {
+      "id": 2,
+      "category": 0,
+      "categoryName": "Смартфоны",
+      "preview": "/images/phones/phone-1.jpg",
+      "name": "Xiaomi Redmi A1+ 2/32GB (голубой)",
+      "price": 4990
+    },
+    {
+      "id": 3,
+      "category": 0,
+      "categoryName": "Смартфоны",
+      "preview": "/images/phones/phone-1.jpg",
+      "name": "Xiaomi Redmi A1+ 2/32GB (голубой)",
+      "price": 4990
+    },
+    {
+      "id": 4,
+      "category": 0,
+      "categoryName": "Смартфоны",
+      "preview": "/images/phones/phone-1.jpg",
+      "name": "Xiaomi Redmi A1+ 2/32GB (голубой)",
+      "price": 4990
+    },
+    {
+      "id": 5,
+      "category": 1,
+      "categoryName": "Чехол",
+      "preview": "/images/accessory/accessory-1.jpg",
+      "name": "Red line Ultimate ",
+      "price": 290
+    },
+    {
+      "id": 6,
+      "category": 1,
+      "categoryName": "Чехол",
+      "preview": "/images/accessory/accessory-1.jpg",
+      "name": "Red line Ultimate ",
+      "price": 290
+    },
+    {
+      "id": 7,
+      "category": 1,
+      "categoryName": "Чехол",
+      "preview": "/images/accessory/accessory-1.jpg",
+      "name": "Red line Ultimate ",
+      "price": 290
+    },
+    {
+      "id": 8,
+      "category": 2,
+      "categoryName": "Умные часы",
+      "preview": "/images/usage/usage-1.jpg",
+      "name": "Amazfit GTS",
+      "price": 7490
+    },
+    {
+      "id": 9,
+      "category": 2,
+      "categoryName": "Умные часы",
+      "preview": "/images/usage/usage-1.jpg",
+      "name": "Amazfit GTS",
+      "price": 7490
+    },
+    {
+      "id": 10,
+      "category": 2,
+      "categoryName": "Умные часы",
+      "preview": "/images/usage/usage-1.jpg",
+      "name": "Amazfit GTS",
+      "price": 7490
+    },
   ]
 }

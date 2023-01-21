@@ -4,6 +4,37 @@ import { getData } from "./api";
 
 
 export const categoriesFunc = () => {
-      getData('/categoties')
-            .then(data => res)
+      const container = document.getElementById('categories-container');
+
+
+      const render = (data) => {                // data = [ {id, name, preview}, {}, {} ]
+
+            data.forEach((category) => {
+                  container.insertAdjacentHTML('beforeend', `
+                        <div class="col col-12 col-md-6 col-lg-4 mb-3">
+                              <a href="/catalog.html?id=${category.id}" class="card-link">
+                                    <div class="card">
+                                          <img src="${category.preview}" class="card-img-top" alt="phones">
+                                          <div class="card-body">
+                                                <h5 class="card-title">${category.name}</h5>
+                                          </div>
+                                    </div>
+                               </a>
+                        </div>
+                  `);
+            });
+      }
+
+
+      getData('/categories')
+            .then((data) => {  // data  = [ {id, name, preview}, {}, {} ]
+                  render(data);
+            })
+            .catch((error) => {
+                  console.error('Произошла ошибка');
+            });
+
+
+
+
 };
