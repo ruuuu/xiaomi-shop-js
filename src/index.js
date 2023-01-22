@@ -4,4 +4,4 @@ import { categoriesFunc } from "./modules/categories";
 
 
 authFunc();
-categoriesFunc(); // отрисовка категрий
+categoriesFunc();       // отрисовка категорий

@@ -34,12 +34,11 @@ export const authFunc = () => {
       const checkAuth = () => {
 
             //console.log(JSON.parse(localStorage.getItem('auth')));          // переврдим из строки в  json
-            const user = JSON.parse(localStorage.getItem('auth'));            // {"login": "то что ввел бзер" , "password": "то что ввел юзер"}
+            const user = JSON.parse(localStorage.getItem('auth'));            // { "login": "то что ввел бзер",  "password": "то что ввел юзер" }
 
             if (user) {
                   getData('/profile')
-                        .then((data) => {                                      // data={login: "admin", passsword: "1234"} ответ сервера
-
+                        .then((data) => {                                      // data = { login: "admin",  passsword: "1234" } ответ сервера
                               if ((data.login === user.login) && (data.password === user.password)) {
                                     login();
                               }

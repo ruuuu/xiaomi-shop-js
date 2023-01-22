@@ -34,7 +34,4 @@ export const categoriesFunc = () => {
                   console.error('Произошла ошибка');
             });
 
-
-
-
 };
