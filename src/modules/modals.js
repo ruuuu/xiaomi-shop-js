@@ -1,6 +1,7 @@
-// открытие окна
+// открытие/закрытие мод  окна
+
 export const openModal = (modal) => {
-      // вместо след четырех строк используем метод insertAdjacmentHTML:
+      // вместо след четырех строк можно использваоть  метод insertAdjacmentHTML:
       const layout = document.createElement('div');   //  оверлей для модалки(затемненая облатсь вокруг модалки)
       layout.classList.add('modal-backdrop');
       layout.classList.add('fade');
@@ -47,7 +48,5 @@ export const closeModal = (modal) => {
                   layout.remove();              // удаляем элемент из верстки
             }
       }, 500);
-
-
 
 }

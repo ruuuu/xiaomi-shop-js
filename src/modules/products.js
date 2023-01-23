@@ -38,12 +38,24 @@ export const prodocutsFunc = () => {
       }
 
 
-      getData('/products')
-            .then((data) => {  // data  = [ {id, category, categoryName, name, price, preview }, {}, {} ]
-                  renderProducts(data);
-            })
-            .catch((error) => {
-                  console.error('Произошла ошибка');
-            });
+
+
+      const init = () => {   //  отсюда начинается
+            //console.log(window.location);                                   // выведет инфрмацию об урле
+            const params = window.location.search                             // вывдеет query параметры ?id=2
+            const urlSearchParams = new URLSearchParams(params);
+            const id = urlSearchParams.get('id');                             // получим значение query-параметра id
+            const url = id ? `/products?category=${id}` : `/products`;        // в db.json есть  массив products,поэтому в урле пишем products.  У его элементов есть свойсвто category, поэтому queryParametr навазли category . https://www.npmjs.com/package/json-server#filter 
+
+            getData(url)
+                  .then((data) => {  // data  = [ {id, category, categoryName, name, price, preview }, {}, {} ]
+                        renderProducts(data);
+                  })
+                  .catch((error) => {
+                        console.error('Произошла ошибка');
+                  });
+      }
+
+      init();
 
 };

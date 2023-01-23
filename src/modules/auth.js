@@ -9,9 +9,8 @@ export const authFunc = () => {
       const modal = document.getElementById('auth-modal');              // окно авторзиации
       const closeBtns = modal.querySelectorAll('.close-btn');           // кнопки Отмена и кретсик, получим псевдомасив , NodeList = [button.btn-close, button.btn btn-outline-dark close-btn]
       const loginBtn = modal.querySelector('.login-btn');               // кноппка Войти в модалке
-      const openCartBtn = document.getElementById('open-cart-btn');  // кнопка Корзина
+      const openCartBtn = document.getElementById('open-cart-btn');     // кнопка Корзина
       const logoutBtn = document.getElementById('logout-btn');          // кнопка Выйти
-      const cartModal = document.getElementById('cart-modal')           // модалка Корзина
 
 
       const login = () => {                           // отобраажет состояние  при авторизации
@@ -93,9 +92,7 @@ export const authFunc = () => {
       });
 
 
-      openCartBtn.addEventListener('click', () => {  // вешаем собтиые на кнопку Корзина
-            openModal(cartModal);
-      });
+
 
 
       checkAuth(); // проверяем есть ли данные в localStorage
