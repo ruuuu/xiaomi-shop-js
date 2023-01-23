@@ -66,7 +66,7 @@
       "category": 1,
       "categoryName": "Чехол",
       "preview": "/images/accessory/accessory-1.jpg",
-      "name": "Red line Ultimate ",
+      "name": "Red line Ultimate",
       "price": 290
     },
     {
@@ -74,7 +74,7 @@
       "category": 1,
       "categoryName": "Чехол",
       "preview": "/images/accessory/accessory-1.jpg",
-      "name": "Red line Ultimate ",
+      "name": "Red line Ultimate",
       "price": 290
     },
     {
@@ -82,7 +82,7 @@
       "category": 1,
       "categoryName": "Чехол",
       "preview": "/images/accessory/accessory-1.jpg",
-      "name": "Red line Ultimate ",
+      "name": "Red line Ultimate",
       "price": 290
     },
     {
@@ -108,6 +108,20 @@
       "preview": "/images/usage/usage-1.jpg",
       "name": "Amazfit GTS",
       "price": 7490
+    }
+  ],
+  "cart": [
+    {
+      "id": 0,
+      "name": "Xiaomi Redmi A1+ 2/32GB (голубой)",
+      "count": 1,
+      "price": 4990
+    },
+    {
+      "id": 1,
+      "name": "Red line Ultimate",
+      "count": 1,
+      "price": 290
     }
   ]
 }
