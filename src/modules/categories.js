@@ -26,9 +26,9 @@ export const categoriesFunc = () => {
       }
 
 
-      getData('/categories')
-            .then((data) => {  // data  = [ {id, name, preview}, {}, {} ]
-                  render(data);
+      getData('/categories')        // ГЕТ запрос http://localhost:3001/categories
+            .then((data) => {       // data  = [ {id, name, preview}, {}, {} ]
+                  render(data);     // отрисует категории
             })
             .catch((error) => {
                   console.error('Произошла ошибка');
