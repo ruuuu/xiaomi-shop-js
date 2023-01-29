@@ -26,7 +26,7 @@ export const categoriesFunc = () => {
       }
 
 
-      getData('/categories')        // ГЕТ запрос http://localhost:3001/categories
+      getData('/categories')        // categories -это свойстов в db.json, ГЕТ запрос http://localhost:3001/categories
             .then((data) => {       // data  = [ {id, name, preview}, {}, {} ]
                   render(data);     // отрисует категории
             })

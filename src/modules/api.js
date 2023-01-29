@@ -26,4 +26,23 @@ export const postData = (path, dataObj) => {    //    dataObj = { "name": ,  "pr
                   }
                   return response.json();
             });
-}
+};
+
+
+
+// удаение категрии методом DELETE:
+export const deleteData = (path) => {
+
+      return fetch(apiPath + path,
+            {
+                  method: 'DELETE'
+            })
+            .then(response => {                             // как только данные полуим от сервера, выполнится метод then(), он обрабатывает промис
+                  if (!response.ok) {
+                        throw new Error('Ошибка получения  данных');
+                  }
+                  return response.json();
+            });
+};
+
+

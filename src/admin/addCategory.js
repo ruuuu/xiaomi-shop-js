@@ -1,37 +1,44 @@
 // добавление категории в админке:
-import { postData, getData } from "../modules/api";
+import { postData, getData, deleteData } from "../modules/api";
 
 
 export const addCategory = () => {
       const nameInput = document.getElementById('category-name');
       const previewInput = document.getElementById('category-image');   // поле для загрузки картнки категории
-      const saveButton = document.getElementById('category-add-btn');   //кнпока Добавить
-      const container = document.getElementById('category-container');
+      const saveButton = document.getElementById('category-add-btn');   // кнпока Добавить
+      const container = document.getElementById('category-container');   // <table>
+      const categoryList = document.getElementById('product-category');
 
 
-
-      const categoryData = {  // этот объект будем отправлять на сервер, нач значения пустые поля
-            "name": "",
+      const categoryData = {        // этот объект будем отправлять на сервер, нач значения пустые поля. Заполнят будем в обработчиках
+            "name": "",             // названия свойств ввзяли из db.json.categories
             "preview": ""
       };
 
 
       // отрисовка таблицы категорий:
-      const renderAdminCategory = (data) => {                // data = [ {id: , name: , preview: }, {}, {} ] с сервера  категрии
+      const renderAdminCategory = (data) => {                // data = [ {id: , name: , preview: }, {}, {} ] с сервера(db.json)  категрии
             container.innerHTML = '';
 
             data.forEach((categoryItem, index) => {
 
+                  //  кнопке Удалить добавили дата-атрибут  data-category, чтобы знать какой атрибут удалять 
                   container.insertAdjacentHTML('beforeend', `
                       <tr>
                           <th scope="row">${index + 1}</th>
                           <td>${categoryItem.name}</td>
                           <td class="text-end">
-                              <button type="button" class="btn btn-outline-danger btn-sm">
+                              <button type="button" class="btn btn-outline-danger btn-sm" data-category="${categoryItem.id}">
                                   удалить
                               </button>
                           </td>
                       </tr>
+                  `);
+
+
+                  // созданную категорию добляем в выпадащий спсик категлрий:
+                  categoryList.insertAdjacentHTML('beforeend', ` 
+                         <option value="${categoryItem.id}">${categoryItem.name}</option>
                   `);
             });
       };
@@ -50,12 +57,12 @@ export const addCategory = () => {
       };
 
 
-
+      //  рисуем таблицу категорий:
       const updateTable = () => {
-            getData('/categories')
+            getData('/categories')                                                      // categories- свойство в  db.json
                   .then((data) => {
-                        console.log('data from updateTable ', data);                 // data= [ { id: , name: , preview: }, {}, {} ] - ответ сервера
-                        renderAdminCategory(data);
+                        //console.log('data from updateTable ', data);                 // data= [ { id: , name: , preview: }, {}, {} ] - ответ сервера
+                        renderAdminCategory(data);                                    // рисуем таблицу категерий
                   });
       };
 
@@ -93,28 +100,43 @@ export const addCategory = () => {
       });
 
 
-      saveButton.addEventListener('click', () => {  // после отправки запроса, данные запишутся в  db.json в categories
-            postData('/categories',
+
+      saveButton.addEventListener('click', () => {  // после отправки запроса, данные запишутся в  db.json в сво-во categories
+            postData('/categories',                         // categories - свойство в db.json
                   {
                         method: 'POST',
-                        body: JSON.stringify(categoryData),  // JSON.stringify() преврщает объект categoryData = {name":  , "preview": } в строку
+                        body: JSON.stringify(categoryData),  // JSON.stringify() преврщает объект categoryData = { name":  , "preview": } в строку
                         headers: {                           // заголовки запроса
                               'Content-Type': 'application/json'
                         }
                   })
                   .then((data) => {                   // как только полуичм отвт(data) от сервера, выполнится этот then 
-                        console.log('data from saveButton.addEventListener', data);            // {name, preview, id}
+                        //console.log('data from saveButton.addEventListener', data);            // { name, preview, id}
+                        nameInput.value = '';         // очищаем поле после отправки данных
+                        previewInput.value = '';
                         updateTable();
                   });
       });
 
 
 
-      updateTable();  // отрисовка  таблицы категорий
+      // вместо того чтобы вешать обработчик на каждую кнпоку Удалить у катеогории, вешаем на  родителя категорий
+      container.addEventListener('click', (evt) => {              // evt нужен чтобы знать  какую катгеорию надо удалить
+
+            if (evt.target.tagName === 'BUTTON') {                //   если нажали на кнопку Удалить
+                  const id = evt.target.dataset.category;         // сохраняем значение data-category
+                  deleteData(`/categories/${id}`)                       // categories - свойство в db.json
+                        .then((data) => {                         // data-то что полуилии от сервера 
+                              updateTable();
+                        })
+            }
+      });
+
+
+
+      updateTable();  // отрисовка  таблицы категорий (в админке)
       checkValues();
 
 
 };
 
-
-// остановилась на 00:48
