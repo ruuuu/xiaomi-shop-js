@@ -6,7 +6,7 @@ export const addCategory = () => {
       const nameInput = document.getElementById('category-name');
       const previewInput = document.getElementById('category-image');   // поле для загрузки картнки категории
       const saveButton = document.getElementById('category-add-btn');   // кнпока Добавить
-      const container = document.getElementById('category-container');   // <table>
+      const container = document.getElementById('category-container');   // <table> для категорий
       const categoryList = document.getElementById('product-category');
 
 
@@ -28,9 +28,7 @@ export const addCategory = () => {
                           <th scope="row">${index + 1}</th>
                           <td>${categoryItem.name}</td>
                           <td class="text-end">
-                              <button type="button" class="btn btn-outline-danger btn-sm" data-category="${categoryItem.id}">
-                                  удалить
-                              </button>
+                              <button type="button" class="btn btn-outline-danger btn-sm" data-category="${categoryItem.id}"> Удалить </button>
                           </td>
                       </tr>
                   `);
@@ -55,6 +53,7 @@ export const addCategory = () => {
                   saveButton.disabled = false;
             }
       };
+
 
 
       //  рисуем таблицу категорий:
@@ -100,7 +99,7 @@ export const addCategory = () => {
       });
 
 
-
+      // создание Категории:
       saveButton.addEventListener('click', () => {  // после отправки запроса, данные запишутся в  db.json в сво-во categories
             postData('/categories',                         // categories - свойство в db.json
                   {
@@ -120,11 +119,11 @@ export const addCategory = () => {
 
 
 
-      // вместо того чтобы вешать обработчик на каждую кнпоку Удалить у катеогории, вешаем на  родителя категорий
+      // Удаление категории:  вместо того чтобы вешать обработчик на каждую кнпоку Удалить у катеогории, вешаем на  родителя категорий
       container.addEventListener('click', (evt) => {              // evt нужен чтобы знать  какую катгеорию надо удалить
 
             if (evt.target.tagName === 'BUTTON') {                //   если нажали на кнопку Удалить
-                  const id = evt.target.dataset.category;         // сохраняем значение data-category
+                  const id = evt.target.dataset.category;         // сохраняем значение датта-атрибта data-category
                   deleteData(`/categories/${id}`)                       // categories - свойство в db.json
                         .then((data) => {                         // data-то что полуилии от сервера 
                               updateTable();

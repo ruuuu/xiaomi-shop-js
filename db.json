@@ -27,92 +27,11 @@
   ],
   "products": [
     {
-      "id": 0,
-      "category": 0,
-      "categoryName": "Смартфоны",
-      "preview": "/images/phones/phone-1.jpg",
-      "name": "Xiaomi Redmi A1+ 2/32GB (голубой)",
-      "price": 4990
-    },
-    {
-      "id": 1,
-      "category": 0,
-      "categoryName": "Смартфоны",
-      "preview": "/images/phones/phone-1.jpg",
-      "name": "Xiaomi Redmi A1+ 2/32GB (голубой)",
-      "price": 4990
-    },
-    {
-      "id": 2,
-      "category": 0,
-      "categoryName": "Смартфоны",
-      "preview": "/images/phones/phone-1.jpg",
-      "name": "Xiaomi Redmi A1+ 2/32GB (голубой)",
-      "price": 4990
-    },
-    {
-      "id": 3,
-      "category": 0,
-      "categoryName": "Смартфоны",
-      "preview": "/images/phones/phone-1.jpg",
-      "name": "Xiaomi Redmi A1+ 2/32GB (голубой)",
-      "price": 4990
-    },
-    {
-      "id": 4,
-      "category": 0,
-      "categoryName": "Смартфоны",
-      "preview": "/images/phones/phone-1.jpg",
-      "name": "Xiaomi Redmi A1+ 2/32GB (голубой)",
-      "price": 4990
-    },
-    {
-      "id": 5,
-      "category": 1,
-      "categoryName": "Чехол",
-      "preview": "/images/accessory/accessory-1.jpg",
-      "name": "Red line Ultimate",
-      "price": 290
-    },
-    {
-      "id": 6,
-      "category": 1,
-      "categoryName": "Чехол",
-      "preview": "/images/accessory/accessory-1.jpg",
-      "name": "Red line Ultimate",
-      "price": 290
-    },
-    {
-      "id": 7,
-      "category": 1,
-      "categoryName": "Чехол",
-      "preview": "/images/accessory/accessory-1.jpg",
-      "name": "Red line Ultimate",
-      "price": 290
-    },
-    {
-      "id": 8,
-      "category": 2,
-      "categoryName": "Умные часы",
-      "preview": "/images/usage/usage-1.jpg",
-      "name": "Amazfit GTS",
-      "price": 7490
-    },
-    {
-      "id": 9,
-      "category": 2,
-      "categoryName": "Умные часы",
-      "preview": "/images/usage/usage-1.jpg",
-      "name": "Amazfit GTS",
-      "price": 7490
-    },
-    {
-      "id": 10,
-      "category": 2,
-      "categoryName": "Умные часы",
-      "preview": "/images/usage/usage-1.jpg",
-      "name": "Amazfit GTS",
-      "price": 7490
+      "name": "Пылесос Richmond",
+      "preview": "data:image/png;base64,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",
+      "price": 2164,
+      "title": "Умный пылесос",
+      "id": 11
     }
   ],
   "cart": [

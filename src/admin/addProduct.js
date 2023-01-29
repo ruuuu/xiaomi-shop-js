@@ -1,4 +1,6 @@
 // Добалвение товара в админке admin.html:
+import { getData, postData, deleteData } from "../modules/api";
+
 
 export const addProduct = () => {
       const nameInput = document.getElementById('product-name');
@@ -7,31 +9,35 @@ export const addProduct = () => {
       const priceInput = document.getElementById('product-price');
       const saveButton = document.getElementById('product-add-btn');     // кнпока Добавить
       const selectCategory = document.getElementById('product-category');      // выпадающий список катеогрий
-      const container = document.getElementById('product-table');        // <table>
+      const container = document.getElementById('product-container');        // <table> для продуктов
 
 
 
       const productData = {         // этот объект будем отправлять на сервер, нач значения пустые поля. Заполнят будем в обработчиках
             "name": "",             // названия свойств ввзяли из db.json.products
             "preview": "",
-            // "category": "",
-            // "categoryName": "",
             "price": 0,
             "title": ""  // это свойство добвится в  db.json.products
       };
 
 
 
-      const renderAdminProducts = (data) => {                // data = [ {  name: , preview: , price:, title: }, {}, {} ] с сервера(db.json)  категрии
-            container.innerHTML = '';
-
-            data.forEach((categoryItem, index) => {
-
+      const renderAdminProducts = (data) => {                // data = [ {  name: , preview: , price:, title: }, {}, {} ] с сервера(db.json) продкуты
+            container.innerHTML = '';                        // очищаем изначально
+            // кнопку Удалить добвили дата-атрибут data-product, чтобы знть какой продукт удалили
+            data.forEach((productItem, index) => {
 
                   container.insertAdjacentHTML('beforeend', `
-                      
+                        <tr>
+                              <th scope="row">${index + 1}</th>
+                              <td>${productItem.title}</td>
+                              <td>${productItem.name}</td>
+                              <td>${productItem.price} ₽</td>
+                              <td class="text-end">
+                                    <button type="button" class="btn btn-outline-danger btn-sm" data-product="${productItem.id}"> Удалить </button>
+                              </td>
+                        </tr> 
                   `);
-
 
             });
       };
@@ -109,34 +115,47 @@ export const addProduct = () => {
       const updateTable = () => {
             getData('/products')                                                       // products- свойство в  db.json
                   .then((data) => {
-                        //console.log('data from updateTable ', data);                 // data= [ { id: , name: , preview: }, {}, {} ] - ответ сервера(db.json)
+                        console.log('data from updateTable ', data);                 // data= [ { id: , name: , preview: }, {}, {} ] - ответ сервера(db.json)
                         renderAdminProducts(data);                                    // рисуем таблицу продуктов
                   });
       };
 
 
+      // создание  Продукта:
       saveButton.addEventListener('click', () => {  // после отправки запроса, данные запишутся в  db.json в сво-во products
-
 
             console.log(productData);
 
-            // postData('/products',                         // products - свойство в db.json
-            //       {
-            //             method: 'POST',
-            //             body: JSON.stringify(productData),  // JSON.stringify() преврщает объект productData = { name":  , "preview": , "category": , "categoryName": , "price": , "title": } в строку
-            //             headers: {
-            //                   'Content-Type': 'application/json'
-            //             }
-            //       })
-            //       .then((data) => {                   // как только полуичм отвт(data) от сервера(db.json), выполнится этот then 
-            //             //console.log('data from saveButton.addEventListener', data);            // { name":  , "preview": , "category": , "categoryName": , "price": , "title": }
-            //             nameInput.value = '';         // очищаем поля после отправки данных
-            //             previewInput.value = '';
-            //             priceInput.value = '';
-            //             titleInput.value = '';
+            postData('/products',                         // products - свойство в db.json
+                  {
+                        method: 'POST',
+                        body: JSON.stringify(productData),  // JSON.stringify() преврщает объект productData = { name":  , "preview": , "category": , "categoryName": , "price": , "title": } в строку
+                        headers: {
+                              'Content-Type': 'application/json'
+                        }
+                  })
+                  .then((data) => {                   // как только полуичм отвт(data) от сервера(db.json), выполнится этот then 
+                        //console.log('data from saveButton.addEventListener', data);            // { name":  , "preview": , "category": , "categoryName": , "price": , "title": }
+                        nameInput.value = '';         // очищаем поля после отправки данных
+                        previewInput.value = '';
+                        priceInput.value = '';
+                        titleInput.value = '';
 
-            //             updateTable();
-            //       });
+                        updateTable();
+                  });
+      });
+
+
+      // Удаление продукта:  вместо того чтобы вешать обработчик на каждую кнпоку Удалить у продукта, вешаем на  родителя продуктов
+      container.addEventListener('click', (evt) => {              // evt нужен чтобы знать  какую катгеорию надо удалить
+
+            if (evt.target.tagName === 'BUTTON') {                //   если нажали на кнопку Удалить
+                  const id = evt.target.dataset.product;          // сохраняем значение дата атрибута  data-product
+                  deleteData(`/products/${id}`)                       // products - свойство в db.json
+                        .then((data) => {                         // data-то что полуилии от сервера 
+                              updateTable();
+                        })
+            }
       });
 
       updateTable();
