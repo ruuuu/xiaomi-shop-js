@@ -99,7 +99,7 @@ export const addCategory = () => {
       });
 
 
-      // создание Категории:
+      // создание Категории(заполнение формы):
       saveButton.addEventListener('click', () => {  // после отправки запроса, данные запишутся в  db.json в сво-во categories
             postData('/categories',                         // categories - свойство в db.json
                   {

@@ -17,14 +17,15 @@ export const addProduct = () => {
             "name": "",             // названия свойств ввзяли из db.json.products
             "preview": "",
             "price": 0,
-            "title": ""  // это свойство добвится в  db.json.products
+            "title": "",           // это свойство добвится в  db.json.products
+            "category": 0           // это свойство добвится в  db.json.products
       };
 
 
 
       const renderAdminProducts = (data) => {                // data = [ {  name: , preview: , price:, title: }, {}, {} ] с сервера(db.json) продкуты
             container.innerHTML = '';                        // очищаем изначально
-            // кнопку Удалить добвили дата-атрибут data-product, чтобы знть какой продукт удалили
+            // кнопке Удалить добвили дата-атрибут data-product, чтобы знть какой продукт удалили
             data.forEach((productItem, index) => {
 
                   container.insertAdjacentHTML('beforeend', `
@@ -54,10 +55,18 @@ export const addProduct = () => {
       };
 
 
+
       selectCategory.addEventListener('change', () => {           // обрабочик выпадающ списка Катеогрия:  change- собыие выбора элемента из выпадающего спсика
             //console.log(selectCategory.value);
-            //productData.category = selectCategory.value;
-            //productData.categoryName = selectCategory.value.text;
+            productData.category = selectCategory.value;          // сохранем выбранный вариант из выпадающего списка
+            const url = selectCategory.value !== 'default' ? `/products?category=${selectCategory.value}` : `/products`;              // в db.json есть  массив products,поэтому в урле пишем products.  У его элементов есть свойсвто category, поэтому queryParametr навазли category . https://www.npmjs.com/package/json-server#filter 
+
+            getData(url)                                                            // products- свойство в  db.json
+                  .then((data) => {
+                        console.log('data after filter ', data);                    // data= [ { id: , name: , preview: }, {}, {} ] - ответ сервера(db.json)
+                        renderAdminProducts(data);
+                  });
+
             checkValues();
       });
 
@@ -121,12 +130,12 @@ export const addProduct = () => {
       };
 
 
-      // создание  Продукта:
+      // создание  Продукта(запондение формы):
       saveButton.addEventListener('click', () => {  // после отправки запроса, данные запишутся в  db.json в сво-во products
 
             console.log(productData);
 
-            postData('/products',                         // products - свойство в db.json
+            postData('/products',                           // products - свойство в db.json
                   {
                         method: 'POST',
                         body: JSON.stringify(productData),  // JSON.stringify() преврщает объект productData = { name":  , "preview": , "category": , "categoryName": , "price": , "title": } в строку
@@ -161,3 +170,5 @@ export const addProduct = () => {
       updateTable();
       checkValues();
 };
+
+
