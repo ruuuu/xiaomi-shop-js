@@ -8,7 +8,7 @@ export const prodocutsFunc = () => {
       const container = document.getElementById('products-container');
       container.innerHTML = "";
 
-      const renderProducts = (data) => {                //  data  = [ {id, category, categoryName, name, price, preview }, {}, {} ]
+      const renderProducts = (data) => {                //  data  = [ {id, category, name, price, preview }, {}, {} ]
 
             data.forEach((product) => {
                   //  insertAdjacentHTML  добавляет элементы в container
@@ -18,7 +18,7 @@ export const prodocutsFunc = () => {
                                     <div class="card">
                                           <img src="${product.preview}" class="card-img-top" alt="phone-1">
                                           <div class="card-body">
-                                                <span class="mb-2 d-block text-secondary">${product.categoryName}</span>
+                                                <span class="mb-2 d-block text-secondary">${product.title}</span>
                                                 <h6 class="card-title mb-3">${product.name}</h6>
 
                                                 <div class="row">
