@@ -5,5 +5,5 @@ import { prodocutsFunc } from "./modules/products";
 
 
 authFunc();
-prodocutsFunc();        // отражение верстки спсика продуктов
+prodocutsFunc();        // отображение верстки спсика продуктов отномящихся  к какойто  катгроии
 cartFunc();             // корзина

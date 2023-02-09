@@ -1,4 +1,4 @@
-// Добалвение товара в админке admin.html:
+// Добалвение ктегории и товара  в админке admin.html:
 import { getData, postData, deleteData } from "../modules/api";
 
 
@@ -13,7 +13,7 @@ export const addProduct = () => {
 
 
 
-      const productData = {         // этот объект будем отправлять на сервер, нач значения пустые поля. Заполнят будем в обработчиках
+      const productData = {         // этот объект(товар) будем отправлять на сервер, нач значения пустые поля. Заполнят будем в обработчиках
             "name": "",             // названия свойств ввзяли из db.json.products
             "preview": "",
             "price": 0,
@@ -71,10 +71,12 @@ export const addProduct = () => {
       });
 
 
+
       nameInput.addEventListener('input', () => {     // вешам обработчик на тектсовое поле, пр  вводе символа в поле, вызывается коллбэк
             productData.name = nameInput.value;
             checkValues();
       });
+
 
 
       titleInput.addEventListener('input', () => {          // название Подкатегории
@@ -88,8 +90,6 @@ export const addProduct = () => {
             productData.price = Number(priceInput.value);         // превращаем из строки в число
             checkValues();
       });
-
-
 
 
 
@@ -124,25 +124,20 @@ export const addProduct = () => {
       const updateTable = () => {
             getData('/products')                                                       // products- свойство в  db.json
                   .then((data) => {
-                        console.log('data from updateTable ', data);                 // data= [ { id: , name: , preview: }, {}, {} ] - ответ сервера(db.json)
+                        //console.log('data from updateTable ', data);                 // data= [ { id: , name: , preview: }, {}, {} ] - ответ сервера(db.json)
                         renderAdminProducts(data);                                    // рисуем таблицу продуктов
                   });
       };
 
 
-      // создание  Продукта(запондение формы):
+
+      // создание товара(заполнение формы):
       saveButton.addEventListener('click', () => {  // после отправки запроса, данные запишутся в  db.json в сво-во products
 
-            console.log(productData);
+            //console.log(productData);
 
-            postData('/products',                           // products - свойство в db.json
-                  {
-                        method: 'POST',
-                        body: JSON.stringify(productData),  // JSON.stringify() преврщает объект productData = { name":  , "preview": , "category": , "categoryName": , "price": , "title": } в строку
-                        headers: {
-                              'Content-Type': 'application/json'
-                        }
-                  })
+            postData('/products', productData)                      // products - свойство в db.json
+
                   .then((data) => {                   // как только полуичм отвт(data) от сервера(db.json), выполнится этот then 
                         //console.log('data from saveButton.addEventListener', data);            // { name":  , "preview": , "category": , "categoryName": , "price": , "title": }
                         nameInput.value = '';         // очищаем поля после отправки данных
@@ -153,6 +148,7 @@ export const addProduct = () => {
                         updateTable();
                   });
       });
+
 
 
       // Удаление продукта:  вместо того чтобы вешать обработчик на каждую кнпоку Удалить у продукта, вешаем на  родителя продуктов

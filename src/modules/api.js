@@ -17,9 +17,15 @@ export const getData = (path) => {
 
 
 // отправка данных на сервер(форма создания категории в админке)
-export const postData = (path, dataObj) => {    //    dataObj = { "name": ,  "preview": }
+export const postData = (path, dataObj) => {    //    dataObj = тело запроса
 
-      return fetch(apiPath + path, dataObj)
+      return fetch(apiPath + path, {
+            method: 'POST',
+            body: JSON.stringify(dataObj),                  // JSON.stringify() преврщает объект dataObj в строку
+            headers: {
+                  'Content-Type': 'application/json'
+            }
+      })
             .then(response => {                             // как только данные полуим от сервера, выполнится метод then(), он обрабатывает промис
                   if (!response.ok) {
                         throw new Error('Ошибка получения  данных');
@@ -30,7 +36,26 @@ export const postData = (path, dataObj) => {    //    dataObj = { "name": ,  "pr
 
 
 
-// удаение категрии методом DELETE:
+// метод PUT: для изменения числа товара в корзине
+export const putData = (path, dataObj) => {
+
+      return fetch(apiPath + path, {
+            method: 'PUT',
+            body: JSON.stringify(dataObj),                  // JSON.stringify() преврщает объект dataObj в строку
+            headers: {
+                  'Content-Type': 'application/json'
+            }
+      })
+            .then(response => {                             // как только данные полуим от сервера, выполнится метод then(), он обрабатывает промис
+                  if (!response.ok) {
+                        throw new Error('Ошибка получения  данных');
+                  }
+                  return response.json();
+            });
+};
+
+
+// удаение категории админке  методом DELETE:
 export const deleteData = (path) => {
 
       return fetch(apiPath + path,
