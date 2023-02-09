@@ -55,6 +55,25 @@ export const putData = (path, dataObj) => {
 };
 
 
+// PATCH:
+export const patchData = (path, dataObj) => {
+
+      return fetch(apiPath + path, {
+            method: 'PATCH',
+            body: JSON.stringify(dataObj),                  // JSON.stringify() преврщает объект dataObj в строку
+            headers: {
+                  'Content-Type': 'application/json'
+            }
+      })
+            .then(response => {                             // как только данные полуим от сервера, выполнится метод then(), он обрабатывает промис
+                  if (!response.ok) {
+                        throw new Error('Ошибка получения  данных');
+                  }
+                  return response.json();
+            });
+};
+
+
 // удаение категории админке  методом DELETE:
 export const deleteData = (path) => {
 
