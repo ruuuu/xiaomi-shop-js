@@ -1,4 +1,4 @@
-// отрисовка  списка карточек товаров:
+// отрисовка  списка карточек товаров опреде катеогрии:
 import { getData, postData } from "./api";
 
 
@@ -76,11 +76,15 @@ export const prodocutsFunc = () => {
             const id = urlSearchParams.get('id');                             // получим значение query-параметра id
             const url = id ? `/products?category=${id}` : `/products`;        // в db.json есть  массив products,поэтому в урле пишем products.  У его элементов есть свойсвто category, поэтому queryParametr навазли category . https://www.npmjs.com/package/json-server#filter 
 
+            console.log('url for get product of category ', url);
+
             getData(url)
                   .then((data) => {             // товары конкретной категории:  data  = [ {id, category, categoryName, name, price, preview }, {}, {} ]
+                        console.log('товар конткретно йкатегории ', data);
                         renderProducts(data);
                   })
                   .catch((error) => {
+                        console.log('error ', error);
                         console.error('Произошла ошибка');
                   });
       }

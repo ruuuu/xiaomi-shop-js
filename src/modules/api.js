@@ -55,6 +55,7 @@ export const putData = (path, dataObj) => {
 };
 
 
+
 // PATCH:
 export const patchData = (path, dataObj) => {
 
@@ -72,6 +73,7 @@ export const patchData = (path, dataObj) => {
                   return response.json();
             });
 };
+
 
 
 // удаение категории админке  методом DELETE:
